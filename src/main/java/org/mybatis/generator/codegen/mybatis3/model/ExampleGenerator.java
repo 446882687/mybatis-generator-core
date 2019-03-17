@@ -476,9 +476,9 @@ public class ExampleGenerator extends AbstractJavaGenerator {
                 .getObjectInstance(), "value")); //$NON-NLS-1$
         method.addParameter(new Parameter(FullyQualifiedJavaType
                 .getStringInstance(), "property")); //$NON-NLS-1$
-        method.addBodyLine("if (value == null) {"); //$NON-NLS-1$
+        method.addBodyLine("if (org.springframework.util.ObjectUtils.isEmpty(value) || value.toString().trim().length()==0) {"); //$NON-NLS-1$
         method
-                .addBodyLine("throw new RuntimeException(\"Value for \" + property + \" cannot be null\");"); //$NON-NLS-1$
+                .addBodyLine("return;"); //$NON-NLS-1$
         method.addBodyLine("}"); //$NON-NLS-1$
         method.addBodyLine("criteria.add(new Criterion(condition, value));"); //$NON-NLS-1$
         if (criteriaLists.size() > 1) {
